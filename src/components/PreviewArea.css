@@ -1,0 +1,30 @@
+.bubble {
+  position: relative;
+  background: #eeeeee;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 20px;
+  line-height: 120px;
+  text-align: center;
+  width: 87px;
+  height: 44px;
+  border-radius: 60px;
+  padding: 0px;
+  left: -10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bubble:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 0;
+  z-index: 1;
+  border-style: solid;
+  border-color: #eeeeee transparent;
+  border-width: 8px 8px 0;
+  bottom: -8px;
+  left: 30%;
+  margin-left: -8px;
+}
