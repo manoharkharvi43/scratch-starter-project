@@ -6,35 +6,50 @@ import { leftRotateAction } from "../data/redux/actions/motion_actions/leftRotat
 import { rightRotateAction } from "../data/redux/actions/motion_actions/rightRotateAction";
 import CatSprite from "./CatSprite";
 import "./PreviewArea.css";
+// import { ReactComponent as UploadSvg } from "../assets/svg/file-upload.svg";
+import UploadSvg from "../utility/svgs/uploadSvg";
 function PreviewArea({
   globalEventState,
   leftRotate,
   rightRotate,
   looksAction,
+  onClickSelectSprite,
+  moveXandY,
+  setXandY,
 }) {
   const [divMaxWidth, setDivMaxWidth] = useState("");
-  const [rotate, setRotate] = useState("");
+  const [rotate, setRotate] = useState(0);
+  const [bgColor, setBgColor] = useState("#3373cc");
   const [showMessage, setShowMessage] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
+  const [position, setPosition] = useState({
+    x: 0,
+    y: 0,
+  });
+  const [currentObjectPosition, setCurrentObjectPosition] = useState({
+    x: 0,
+    y: 0,
+  });
   const ref = useRef(null);
   const dispatch = useDispatch();
 
+  const updateCurrentObjectPosition = () => {};
   useEffect(() => {
     setDivMaxWidth(ref.current.offsetWidth);
   }, []);
 
   const clearRedux = () => {
-    dispatch(leftRotateAction(""));
-    dispatch(rightRotateAction(""));
-    dispatch(globalEventAction(""));
+    dispatch(leftRotateAction(0));
+    dispatch(rightRotateAction(0));
+    dispatch(globalEventAction());
   };
 
   useEffect(() => {
-    setRotate(leftRotate);
-    clearRedux();
+    setRotate("-" + leftRotate);
   }, [leftRotate]);
+
   useEffect(() => {
     setRotate(rightRotate);
-    clearRedux();
   }, [rightRotate]);
 
   const showMessageInterval = (time) => {
@@ -48,8 +63,19 @@ function PreviewArea({
     }
   };
   useEffect(() => {
-    showMessageInterval(looksAction.time);
+    if (looksAction.message !== "") showMessageInterval(looksAction.time);
   }, [looksAction]);
+
+  useEffect(() => {
+    setPosition({
+      x: moveXandY.x + globalEventState,
+      y: moveXandY.y,
+    });
+    setPosition({
+      x: globalEventState + moveXandY.x,
+      y: moveXandY.y,
+    });
+  }, [moveXandY, globalEventState]);
 
   return (
     <div className="w-full h-full">
@@ -65,31 +91,76 @@ function PreviewArea({
           className="w-full flex-none h-full overflow-hidden  p-2 "
           ref={ref}
         >
-          <div
-            style={{
-              transform: `translate(${globalEventState} , 0px) rotate(${
-                rightRotate ? rightRotate : leftRotate
-              }deg)`,
-              width: 100,
-              position: "relative",
-            }}
-          >
-            {showMessage && (
-              <div className="bubble">
-                <p
-                  style={{
-                    color: "black",
-                    fontSize: 12,
-                  }}
+          {(!looksAction.hide || looksAction.hide === "") && (
+            <div
+              style={{
+                transform: `translate(${position.x}px , ${position.y}px) rotate(${rotate}deg)`,
+                width: 100,
+                position: "relative",
+                left: setXandY.x,
+                top: setXandY.y,
+              }}
+            >
+              {showMessage && looksAction.hide === "" && (
+                <div
+                  className={
+                    looksAction.type === "message" ? "bubble" : "thinking"
+                  }
                 >
-                  {looksAction.message}
-                </p>
-              </div>
-            )}
-            <CatSprite />
-          </div>
+                  <p
+                    style={{
+                      color: "black",
+                      fontSize: 12,
+                    }}
+                  >
+                    {looksAction.message}
+                  </p>
+                </div>
+              )}
+              <CatSprite />
+            </div>
+          )}
         </div>
       </Draggable>
+
+      <div
+        style={{
+          backgroundColor: bgColor,
+        }}
+        className="w-10	h-10 flex flex-row justify-center items-center absolute bg-sky-500 bottom-4 rounded-full cursor-pointer"
+        id="upload-container"
+        onMouseEnter={(e) => {
+          setShowUpload(true);
+          setBgColor("#0fbd8c");
+        }}
+        onMouseLeave={(e) => {
+          setShowUpload(false);
+          setBgColor("#3373cc");
+        }}
+        onClick={() => {
+          onClickSelectSprite();
+        }}
+      >
+        <p
+          style={{
+            fontSize: 10,
+            color: "white",
+          }}
+        >
+          upload
+        </p>
+        {showUpload && (
+          <div
+            className="absolute bg-sky-500 bottom-11 cursor-pointer w-10 h-10 flex justify-center "
+            id="upload-options"
+            onClick={() => {}}
+          >
+            <div id="single-options">
+              <UploadSvg />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -98,8 +169,10 @@ const mapStateToProps = (state) => {
   return {
     globalEventState: state.globalEventReducer.globalEventState,
     leftRotate: state.leftRotateReducer.leftRotate,
-    rightRotate: state.leftRotateReducer.rightRotate,
+    rightRotate: state.rightRotateReducer.rightRotate,
     looksAction: state.lookReducer.currentLookAction,
+    moveXandY: state.moveXandYReducer.position,
+    setXandY: state.setXandYReducer.position,
   };
 };
 export default connect(mapStateToProps)(PreviewArea);

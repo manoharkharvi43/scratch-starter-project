@@ -1,7 +1,12 @@
 import { CURRENT_LOOK_ACTION } from "../../constants/constants";
 
 const initialState = {
-  currentLookAction: {},
+  currentLookAction: {
+    message: "",
+    time: "",
+    hide: false,
+    type: "message",
+  },
 };
 export const lookReducer = (state = initialState, { payload, type }) => {
   switch (type) {

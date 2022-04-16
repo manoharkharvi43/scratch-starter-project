@@ -1,5 +1,7 @@
 import { leftRotateAction } from "../redux/actions/motion_actions/leftRotateAction";
+import { moveXandYAction } from "../redux/actions/motion_actions/moveXandYAction";
 import { rightRotateAction } from "../redux/actions/motion_actions/rightRotateAction";
+import { setXandYAction } from "../redux/actions/motion_actions/setXandYAction";
 
 export const Motion_List = [
   {
@@ -25,6 +27,23 @@ export const Motion_List = [
     isInputRequired: true,
     input: "number",
     inputCount: 2,
+    action: moveXandYAction,
+  },
+  {
+    leftTitle: "set to x:",
+    isInputRequired: true,
+    input: "number",
+    inputCount: 1,
+    action: setXandYAction,
+    key: "setToX",
+  },
+  {
+    leftTitle: "set to y:",
+    isInputRequired: true,
+    input: "number",
+    inputCount: 1,
+    action: setXandYAction,
+    key: "setToY",
   },
 ];
 
@@ -37,7 +56,8 @@ export const Looks_List = [
     inputCount: 2,
     input1Action: "15deg",
     lastTitle: "Seconds",
-    // action: rightRotateAction,
+    type: "message",
+    action: "",
   },
   {
     leftTitle: "say",
@@ -45,7 +65,8 @@ export const Looks_List = [
     isInputRequired: true,
     input: "text",
     inputCount: 1,
-    // action: leftRotateAction,
+    type: "message",
+    action: "",
   },
   {
     leftTitle: "think",
@@ -53,12 +74,28 @@ export const Looks_List = [
     isInputRequired: true,
     input: "text",
     inputCount: 2,
+    type: "think",
+    action: "",
   },
   {
     leftTitle: "think",
-    rightTitle: "",
+    // rightTitle: "degrees",
     isInputRequired: true,
     input: "text",
     inputCount: 1,
+    type: "think",
+    action: "",
+  },
+  {
+    leftTitle: "show",
+    rightTitle: "",
+    isInputRequired: false,
+    action: "show",
+  },
+  {
+    leftTitle: "hide",
+    rightTitle: "",
+    isInputRequired: false,
+    action: "hide",
   },
 ];

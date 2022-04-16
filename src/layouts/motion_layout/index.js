@@ -1,17 +1,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Motion_List } from "../../data/list_data/index";
 import { globalEventAction } from "../../data/redux/actions/globalEventAction";
 import { MOTION_COLOR } from "../../utility/colorConstants";
 import MotionComps from "../../utility/motion_comps";
 import SvgWithInputs from "../../utility/SvgWithInputs";
-import { Motion_List } from "../../data/list_data/index";
 function MotionLayout() {
   const dispatch = useDispatch();
   return (
     <>
       <SvgWithInputs
         onClick={(val) => {
-          dispatch(globalEventAction(`${val}px`));
+          dispatch(globalEventAction(Number(val)));
         }}
         leftTitle="move"
         rightTitle="steps"
@@ -27,8 +27,27 @@ function MotionLayout() {
             leftTitle={data.leftTitle}
             inputCount={data.inputCount}
             onClick={(val1, val2) => {
-              if (data.inputCount === 1) dispatch(data.action(val1));
-              else dispatch(data.action(val1, val2));
+              if (data.key === "setToX") {
+                dispatch(
+                  data.action({
+                    x: Number(val1),
+                  })
+                );
+              } else if (data.key === "setToY") {
+                dispatch(
+                  data.action({
+                    y: Number(val1),
+                  })
+                );
+              } else if (data.inputCount === 1)
+                dispatch(data.action(Number(val1)));
+              else
+                dispatch(
+                  data.action({
+                    x: Number(val1),
+                    y: Number(val2),
+                  })
+                );
             }}
           />
         </>

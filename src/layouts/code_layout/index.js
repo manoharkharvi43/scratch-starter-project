@@ -35,7 +35,6 @@ function CodeLayout() {
           ></div>
           <p className="text-xs text-center">Motion</p>
         </div>
-
         <div
           className="flex flex-col items-center  mb-3 cursor-pointer"
           onClick={() => {

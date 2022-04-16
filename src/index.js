@@ -4,8 +4,7 @@ import App from "./App";
 import "tailwindcss/tailwind.css";
 import { Provider } from "react-redux";
 import { store } from "./data/redux/store";
-
-console.log("hi");
+import RouteIndex from "./route";
 
 ReactDOM.render(
   <React.StrictMode>

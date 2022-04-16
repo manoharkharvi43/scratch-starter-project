@@ -3,7 +3,7 @@ import Draggable from "react-draggable";
 import SvgBlocks from "./svgs/SvgBlocks";
 
 function SvgWithInputs({ onClick, leftTitle, rightTitle, width }) {
-  const [inputValue, setInputValue] = useState("10");
+  const [inputValue, setInputValue] = useState(10);
   const handleStart = () => {};
   const handleDrag = () => {};
   const handleStop = () => {};

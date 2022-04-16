@@ -1,14 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { connect, useDispatch } from "react-redux";
-import CodeLayout from "../layouts/code_layout";
-import SvgBlocks from "../utility/svgs/SvgBlocks";
-import SvgWithInputs from "../utility/SvgWithInputs";
-import Icon from "./Icon";
-import SvgComponent from "../utility/svgs/SVGcomp";
-import { globalEventAction } from "../data/redux/actions/globalEventAction";
-import MotionLayout from "../layouts/motion_layout/index";
-import LooksLayout from "../layouts/looks_layout";
 import { LOOKS, MOTION } from "../data/redux/constants/constants";
+import CodeLayout from "../layouts/code_layout";
+import LooksLayout from "../layouts/looks_layout";
+import MotionLayout from "../layouts/motion_layout/index";
 function Sidebar({ currentCode }) {
   const motion_ref = useRef();
   const looks_ref = useRef();
@@ -32,7 +27,6 @@ function Sidebar({ currentCode }) {
           Motion
         </div>
         <MotionLayout />
-
         <div className="motion" ref={looks_ref}>
           Looks
         </div>

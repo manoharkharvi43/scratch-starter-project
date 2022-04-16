@@ -1,7 +1,7 @@
 import { GLOBAL_EVENT } from "../constants/constants";
 
 const initialState = {
-  globalEventState: "",
+  globalEventState: 0,
 };
 
 export const globalEventReducer = (state = initialState, { payload, type }) => {
@@ -9,7 +9,7 @@ export const globalEventReducer = (state = initialState, { payload, type }) => {
     case GLOBAL_EVENT:
       return {
         ...state,
-        globalEventState: payload,
+        globalEventState: payload + state?.globalEventState,
       };
 
     default:

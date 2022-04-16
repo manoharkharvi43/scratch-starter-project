@@ -18,6 +18,13 @@ function LooksLayout() {
                 lookAction({
                   message: message,
                   time: time,
+                  type: data.type,
+                  hide:
+                    data.action !== ""
+                      ? data.action === "show"
+                        ? false
+                        : true
+                      : "",
                 })
               );
             }}
