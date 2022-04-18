@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
-import "tailwindcss/tailwind.css";
 import { Provider } from "react-redux";
+import "tailwindcss/tailwind.css";
+import App from "./App";
 import { store } from "./data/redux/store";
-import RouteIndex from "./route";
 
 ReactDOM.render(
   <React.StrictMode>

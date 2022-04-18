@@ -9,6 +9,7 @@ function LooksSvgComps({
   onClick,
   lastTitle,
   id,
+  actionType,
 }) {
   const [message, setMessage] = useState("hello");
   const [inputValue, setInputValue] = useState("1");
@@ -51,8 +52,9 @@ function LooksSvgComps({
         omDragOver={() => {
           setVisible(true);
         }}
-        id={`drag-element-${id}`}
+        id={`${id}`}
         key={`${id}`}
+        actionType={actionType}
       >
         <p
           style={{

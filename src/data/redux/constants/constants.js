@@ -14,3 +14,7 @@ export const SETXANDY = "SETXANDY"; // setting x and y co-ordinates
 
 //LOOKS
 export const CURRENT_LOOK_ACTION = "CURRENT_LOOK_ACTION";
+
+//global play
+
+export const GLOBAL_PLAY_ACTION = "GLOBAL_PLAY_ACTION";

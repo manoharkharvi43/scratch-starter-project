@@ -77,6 +77,9 @@ function PreviewArea({
     });
   }, [moveXandY, globalEventState]);
 
+  useEffect(() => {
+    console.log(position, rotate, "position, rotate");
+  }, [position, rotate]);
   return (
     <div className="w-full h-full">
       <Draggable

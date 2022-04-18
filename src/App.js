@@ -6,18 +6,18 @@ import CodeLayout from "./layouts/code_layout";
 import UploadSvg from "./utility/svgs/uploadSvg";
 import UploadSprites from "./layouts/upload-sprites";
 import { TOP_NAV_COLOR } from "./utility/colorConstants";
+import { useDispatch } from "react-redux";
+import { globalPlayAction } from "./data/redux/actions/globalPlayAction";
 export default function App() {
   const [step, setStep] = useState(0);
-
+  const dispatch = useDispatch();
   return (
     <div className="bg-blue-100  font-sans">
       <div
         style={{
-          height: 40,
-          width: "100%",
           backgroundColor: TOP_NAV_COLOR,
         }}
-        className="flex flex-row justify-end"
+        className="flex flex-row justify-end w-full h-11"
       >
         <div
           style={{
@@ -34,19 +34,16 @@ export default function App() {
               height: 20,
               margin: "5px 0px 5px 0px",
             }}
+            onClick={() => {
+              dispatch(globalPlayAction());
+            }}
           />
         </div>
       </div>
       <div className="h-screen overflow-hidden flex flex-row  ">
         {step === 0 ? (
           <>
-            <div
-              className="flex-1 h-screen overflow-hidden flex flex-row bg-white border-t border-r border-gray-200 rounded-tr-xl mr-2"
-              // onDragOver={(e) => {
-              //   console.log(e, "->");
-              //   e.dataTransfer.setData("text", e.target.id);
-              // }}
-            >
+            <div className="flex-1 h-screen overflow-hidden flex flex-row bg-white border-t border-r border-gray-200 rounded-tr-xl mr-2">
               <Sidebar />
               <MidArea />
             </div>

@@ -8,6 +8,7 @@ function MotionComps({
   onClick,
   id,
   action,
+  actionType,
 }) {
   const [inputValue1, setInputValue1] = useState("10");
   const [inputValue2, setInputValue2] = useState("10");
@@ -49,8 +50,9 @@ function MotionComps({
         omDragOver={() => {
           setVisible(true);
         }}
-        id={`drag-element-${id}`}
+        id={`${id}`}
         key={`${id}`}
+        actionType={actionType}
       >
         <p
           style={{

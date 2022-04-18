@@ -13,6 +13,8 @@ export const Motion_List = [
     inputCount: 1,
     input1Action: "15deg",
     action: globalEventAction,
+    id: "moveForward",
+    actionType: "motion",
   },
   {
     leftTitle: "turn right",
@@ -22,6 +24,8 @@ export const Motion_List = [
     inputCount: 1,
     input1Action: "15deg",
     action: rightRotateAction,
+    id: "turnRight",
+    actionType: "motion",
   },
   {
     leftTitle: "turn left",
@@ -30,6 +34,8 @@ export const Motion_List = [
     input: "number",
     inputCount: 1,
     action: leftRotateAction,
+    id: "turnLeft",
+    actionType: "motion",
   },
   {
     leftTitle: "go to x:",
@@ -38,6 +44,8 @@ export const Motion_List = [
     input: "number",
     inputCount: 2,
     action: moveXandYAction,
+    id: "gotToXAndY",
+    actionType: "motion",
   },
   {
     leftTitle: "set to x:",
@@ -46,6 +54,8 @@ export const Motion_List = [
     inputCount: 1,
     action: setXandYAction,
     key: "setToX",
+    id: "setToX",
+    actionType: "motion",
   },
   {
     leftTitle: "set to y:",
@@ -54,6 +64,8 @@ export const Motion_List = [
     inputCount: 1,
     action: setXandYAction,
     key: "setToY",
+    id: "setToY",
+    actionType: "motion",
   },
 ];
 
@@ -68,6 +80,8 @@ export const Looks_List = [
     lastTitle: "Seconds",
     type: "message",
     action: "",
+    id: "sayMessageForXTime",
+    actionType: "look",
   },
   {
     leftTitle: "say",
@@ -77,6 +91,8 @@ export const Looks_List = [
     inputCount: 1,
     type: "message",
     action: "",
+    id: "sayMessage",
+    actionType: "look",
   },
   {
     leftTitle: "think",
@@ -86,6 +102,8 @@ export const Looks_List = [
     inputCount: 2,
     type: "think",
     action: "",
+    id: "thinkMessageForXTime",
+    actionType: "look",
   },
   {
     leftTitle: "think",
@@ -95,17 +113,23 @@ export const Looks_List = [
     inputCount: 1,
     type: "think",
     action: "",
+    id: "thinkMessage",
+    actionType: "look",
   },
   {
     leftTitle: "show",
     rightTitle: "",
     isInputRequired: false,
     action: "show",
+    id: "showMessage",
+    actionType: "look",
   },
   {
     leftTitle: "hide",
     rightTitle: "",
     isInputRequired: false,
     action: "hide",
+    id: "hideMessage",
+    actionType: "look",
   },
 ];

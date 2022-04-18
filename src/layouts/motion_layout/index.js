@@ -50,7 +50,7 @@ function MotionLayout() {
                   })
                 );
             }}
-            id={index + data.leftTitle + data.rightTitle}
+            id={data.id}
           />
         </>
       ))}
