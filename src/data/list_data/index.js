@@ -1,9 +1,19 @@
+import { globalEventAction } from "../redux/actions/globalEventAction";
 import { leftRotateAction } from "../redux/actions/motion_actions/leftRotateAction";
 import { moveXandYAction } from "../redux/actions/motion_actions/moveXandYAction";
 import { rightRotateAction } from "../redux/actions/motion_actions/rightRotateAction";
 import { setXandYAction } from "../redux/actions/motion_actions/setXandYAction";
 
 export const Motion_List = [
+  {
+    leftTitle: "move",
+    rightTitle: "steps",
+    isInputRequired: true,
+    input: "number",
+    inputCount: 1,
+    input1Action: "15deg",
+    action: globalEventAction,
+  },
   {
     leftTitle: "turn right",
     rightTitle: "degrees",

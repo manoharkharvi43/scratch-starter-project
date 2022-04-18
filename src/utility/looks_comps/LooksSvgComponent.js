@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Draggable from "react-draggable";
 import { LOOKS_COLOR } from "../colorConstants";
 import "./index.css";
 function LooksSvgComps({
@@ -9,203 +8,133 @@ function LooksSvgComps({
   inputCount,
   onClick,
   lastTitle,
+  id,
 }) {
   const [message, setMessage] = useState("hello");
   const [inputValue, setInputValue] = useState("1");
   const [visible, setVisible] = useState(false);
 
+  function dragStart(ev) {
+    ev.dataTransfer.effectAllowed = "move";
+    ev.dataTransfer.setData("Text", ev.target.getAttribute("id"));
+    ev.dataTransfer.setDragImage(ev.target, 0, 0);
+    return true;
+  }
+
   return (
     <>
-      <Draggable
-        onStart={() => {
+      {/* <Draggable
+        onStart={(e) => {
           setVisible(true);
         }}
         onStop={() => {
           setVisible(false);
         }}
+      > */}
+      <div
+        draggable={true}
+        style={{
+          minWidth: 60,
+          height: 30,
+          padding: "0px 5px 0px 5px",
+          cursor: "grab",
+          maxWidth: 150,
+          backgroundColor: LOOKS_COLOR,
+          ...styles,
+        }}
+        className="flex flex-row items-center  justify-between mb-2 "
+        onClick={() => {
+          if (inputCount === 1) onClick(message);
+          else onClick(message, inputValue);
+        }}
+        onDragStart={(e) => dragStart(e)}
+        omDragOver={() => {
+          setVisible(true);
+        }}
+        id={`drag-element-${id}`}
+        key={`${id}`}
       >
-        <div
+        <p
           style={{
-            minWidth: 60,
-            height: 30,
-            padding: "0px 5px 0px 5px",
-            cursor: "grab",
-            backgroundColor: LOOKS_COLOR,
-            ...styles,
-          }}
-          className="flex flex-row items-center  justify-between mb-2 "
-          onClick={() => {
-            if (inputCount === 1) onClick(message);
-            else onClick(message, inputValue);
+            fontSize: 10,
+            color: "white",
           }}
         >
-          <p
-            style={{
-              fontSize: 10,
-              color: "white",
-            }}
-          >
-            {leftTitle}
-          </p>
+          {leftTitle}
+        </p>
 
-          {(inputCount === 1 || inputCount === 2) && (
-            <input
-              style={{
-                width: 30,
-                height: 20,
-                backgroundColor: "white",
-                borderRadius: "20%",
-                border: "1px solid dodgerblue",
-                margin: "0px 3px 0px 3px",
-                // position: "absolute",
-                zIndex: 10,
-                top: 2,
-                right: 40,
-                fontSize: 10,
-                outline: "none",
-              }}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            />
-          )}
-          <p
+        {(inputCount === 1 || inputCount === 2) && (
+          <input
             style={{
+              width: 30,
+              height: 20,
+              backgroundColor: "white",
+              borderRadius: "20%",
+              border: "1px solid dodgerblue",
+              margin: "0px 3px 0px 3px",
+              // position: "absolute",
+              zIndex: 10,
+              top: 2,
+              right: 40,
               fontSize: 10,
-              color: "white",
+              outline: "none",
             }}
-          >
-            {rightTitle}
-          </p>
-
-          {inputCount === 2 && (
-            <input
-              style={{
-                width: 20,
-                height: 20,
-                backgroundColor: "white",
-                borderRadius: "20%",
-                border: "1px solid dodgerblue",
-                margin: "0px 3px 0px 3px",
-                zIndex: 10,
-                top: 2,
-                right: 40,
-                fontSize: 10,
-                outline: "none",
-              }}
-              value={inputValue}
-              defaultValue="10"
-              type="number"
-              onChange={(e) => setInputValue(e.target.value)}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            />
-          )}
-          <p
-            style={{
-              fontSize: 10,
-              color: "white",
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onClick={(e) => {
+              e.stopPropagation();
             }}
-          >
-            {lastTitle}
-          </p>
-        </div>
-      </Draggable>
-
-      {visible && (
-        <div
+            className="input-1"
+          />
+        )}
+        <p
           style={{
-            minWidth: 60,
-            height: 30,
-            padding: "0px 5px 0px 5px",
-            cursor: "grab",
-            backgroundColor: LOOKS_COLOR,
-            ...styles,
-          }}
-          className="flex flex-row items-center  justify-between mb-2 "
-          onClick={() => {
-            if (inputCount === 1) onClick(message);
-            else onClick(message, inputValue);
+            fontSize: 10,
+            color: "white",
           }}
         >
-          <p
-            style={{
-              fontSize: 10,
-              color: "white",
-            }}
-          >
-            {leftTitle}
-          </p>
+          {rightTitle}
+        </p>
 
-          {(inputCount === 1 || inputCount === 2) && (
-            <input
-              style={{
-                width: 30,
-                height: 20,
-                backgroundColor: "white",
-                borderRadius: "20%",
-                border: "1px solid dodgerblue",
-                margin: "0px 3px 0px 3px",
-                // position: "absolute",
-                zIndex: 10,
-                top: 2,
-                right: 40,
-                fontSize: 10,
-                outline: "none",
-              }}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            />
-          )}
-          <p
+        {inputCount === 2 && (
+          <input
             style={{
+              width: 20,
+              height: 20,
+              backgroundColor: "white",
+              borderRadius: "20%",
+              border: "1px solid dodgerblue",
+              margin: "0px 3px 0px 3px",
+              zIndex: 10,
+              top: 2,
+              right: 40,
               fontSize: 10,
-              color: "white",
+              outline: "none",
             }}
-          >
-            {rightTitle}
-          </p>
+            onDragStart={(e) => dragStart(e)}
+            className="input-2"
+            // id={`drag-element-${id}`}
 
-          {inputCount === 2 && (
-            <input
-              style={{
-                width: 20,
-                height: 20,
-                backgroundColor: "white",
-                borderRadius: "20%",
-                border: "1px solid dodgerblue",
-                margin: "0px 3px 0px 3px",
-                zIndex: 10,
-                top: 2,
-                right: 40,
-                fontSize: 10,
-                outline: "none",
-              }}
-              value={inputValue}
-              defaultValue="10"
-              type="number"
-              onChange={(e) => setInputValue(e.target.value)}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            />
-          )}
-          <p
-            style={{
-              fontSize: 10,
-              color: "white",
+            draggable={true}
+            value={inputValue}
+            defaultValue="10"
+            type="number"
+            onChange={(e) => setInputValue(e.target.value)}
+            onClick={(e) => {
+              e.stopPropagation();
             }}
-          >
-            {lastTitle}
-          </p>
-        </div>
-      )}
+          />
+        )}
+        <p
+          style={{
+            fontSize: 10,
+            color: "white",
+          }}
+        >
+          {lastTitle}
+        </p>
+      </div>
+      {/* </Draggable> */}
     </>
   );
 }

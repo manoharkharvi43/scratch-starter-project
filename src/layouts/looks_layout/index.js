@@ -29,6 +29,7 @@ function LooksLayout() {
               );
             }}
             lastTitle={data.lastTitle}
+            id={index + data.leftTitle + data.rightTitle}
           />
         </>
       ))}

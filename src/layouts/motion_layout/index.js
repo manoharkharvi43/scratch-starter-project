@@ -9,13 +9,13 @@ function MotionLayout() {
   const dispatch = useDispatch();
   return (
     <>
-      <SvgWithInputs
+      {/* <SvgWithInputs
         onClick={(val) => {
           dispatch(globalEventAction(Number(val)));
         }}
         leftTitle="move"
         rightTitle="steps"
-      />
+      /> */}
 
       {Motion_List.map((data, index) => (
         <>
@@ -26,6 +26,7 @@ function MotionLayout() {
             rightTitle={data.rightTitle}
             leftTitle={data.leftTitle}
             inputCount={data.inputCount}
+            actions={data.action}
             onClick={(val1, val2) => {
               if (data.key === "setToX") {
                 dispatch(
@@ -49,6 +50,7 @@ function MotionLayout() {
                   })
                 );
             }}
+            id={index + data.leftTitle + data.rightTitle}
           />
         </>
       ))}
