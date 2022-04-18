@@ -79,6 +79,7 @@ function MotionComps({
               fontSize: 10,
               outline: "none",
             }}
+            type="number"
             value={inputValue1}
             onChange={(e) => setInputValue1(e.target.value)}
             onClick={(e) => {
@@ -163,6 +164,7 @@ function MotionComps({
                 fontSize: 10,
                 outline: "none",
               }}
+              type="number"
               value={inputValue1}
               onChange={(e) => setInputValue1(e.target.value)}
               onClick={(e) => {
