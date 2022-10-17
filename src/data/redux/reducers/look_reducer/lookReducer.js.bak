@@ -6,8 +6,6 @@ const initialState = {
     time: "",
     hide: false,
     type: "message",
-    size: 1,
-    costume: 1,
   },
 };
 export const lookReducer = (state = initialState, { payload, type }) => {

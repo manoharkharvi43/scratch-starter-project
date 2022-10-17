@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
 
 function MotionComps({
   styles,
@@ -10,17 +9,9 @@ function MotionComps({
   id,
   action,
   actionType,
-  isSelectRequired,
-  options,
-  xAxisRequired,
-  yAxisRequired,
-  glide = false,
-  motionPosition,
 }) {
   const [inputValue1, setInputValue1] = useState("10");
   const [inputValue2, setInputValue2] = useState("10");
-  const [xAxis, setXAxis] = useState(motionPosition.x);
-  const [yAxis, setYAxis] = useState(motionPosition.y);
   const [visible, setVisible] = useState(false);
 
   function dragStart(ev) {
@@ -29,11 +20,6 @@ function MotionComps({
     ev.dataTransfer.setDragImage(ev.target, 0, 0);
     return true;
   }
-
-  useEffect(() => {
-    setXAxis(motionPosition.x);
-    setYAxis(motionPosition.y);
-  }, [motionPosition]);
 
   return (
     <>
@@ -50,9 +36,9 @@ function MotionComps({
         style={{
           minWidth: 120,
           height: 30,
-          padding: "10px",
+          padding: "0px 5px 0px 5px",
           cursor: "grab",
-          maxWidth: 200,
+          maxWidth: 150,
           ...styles,
         }}
         className="flex flex-row items-center  justify-between mb-2 "
@@ -76,69 +62,6 @@ function MotionComps({
         >
           {leftTitle}
         </p>
-
-        {isSelectRequired && (
-          <select
-            options={options}
-            onChange={(e) => {
-              setInputValue1(e.target.value);
-            }}
-            style={{
-              backgroundColor: "#4280D7",
-              borderRadius: "10px",
-              color: "white",
-              fontSize: "12px",
-              marginLeft: "5px",
-              zIndex: 10,
-            }}
-          >
-            {options &&
-              options.map((option, index) => {
-                return (
-                  <option
-                    key={index}
-                    style={{
-                      color: "white",
-                      backgroundColor: "white",
-                      fontSize: 12,
-                    }}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                );
-              })}
-          </select>
-        )}
-
-        {xAxisRequired && (
-          <input
-            style={{
-              width: 20,
-              height: 20,
-              backgroundColor: "white",
-              borderRadius: "20%",
-              border: "1px solid dodgerblue",
-              margin: "0px 3px 0px 3px",
-              // position: "absolute",
-              zIndex: 10,
-              top: 2,
-              right: 40,
-              fontSize: 10,
-              outline: "none",
-            }}
-            type="number"
-            value={xAxis}
-            onChange={(e) => {
-              setInputValue1(e.target.value);
-              setXAxis(e.target.value);
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            className="input-1"
-          />
-        )}
 
         {(inputCount === 1 || inputCount === 2) && (
           <input
@@ -173,37 +96,6 @@ function MotionComps({
         >
           {rightTitle}
         </p>
-
-        {yAxisRequired && (
-          <input
-            style={{
-              width: 20,
-              height: 20,
-              backgroundColor: "white",
-              borderRadius: "20%",
-              border: "1px solid dodgerblue",
-              margin: "0px 3px 0px 3px",
-              // position: "absolute",
-              zIndex: 10,
-              top: 2,
-              right: 40,
-              fontSize: 10,
-              outline: "none",
-            }}
-            type="number"
-            value={yAxis}
-            onChange={(e) => {
-              if (xAxisRequired) {
-                setInputValue2(e.target.value);
-              } else setInputValue2(e.target.value);
-              setYAxis(e.target.value);
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            className="input-1"
-          />
-        )}
 
         {inputCount === 2 && (
           <input
@@ -319,10 +211,4 @@ function MotionComps({
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    motionPosition: state.motionReducer.position,
-  };
-};
-
-export default connect(mapStateToProps)(MotionComps);
+export default MotionComps;

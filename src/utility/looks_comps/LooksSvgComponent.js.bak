@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
 import { LOOKS_COLOR } from "../colorConstants";
 import "./index.css";
 function LooksSvgComps({
@@ -11,15 +10,10 @@ function LooksSvgComps({
   lastTitle,
   id,
   actionType,
-  isSelectRequired,
-  options,
-  looksAction,
-  value,
 }) {
-  const [message, setMessage] = useState(value ? value : "hello");
+  const [message, setMessage] = useState("hello");
   const [inputValue, setInputValue] = useState("1");
   const [visible, setVisible] = useState(false);
-  const [costume, setCostume] = useState(looksAction.costume);
 
   function dragStart(ev) {
     ev.dataTransfer.effectAllowed = "move";
@@ -28,12 +22,16 @@ function LooksSvgComps({
     return true;
   }
 
-  useEffect(() => {
-    setCostume(looksAction.costume);
-  }, [looksAction.costume]);
-
   return (
     <>
+      {/* <Draggable
+        onStart={(e) => {
+          setVisible(true);
+        }}
+        onStop={() => {
+          setVisible(false);
+        }}
+      > */}
       <div
         draggable={true}
         style={{
@@ -47,10 +45,8 @@ function LooksSvgComps({
         }}
         className="flex flex-row items-center  justify-between mb-2 "
         onClick={() => {
-          if (isSelectRequired) {
-            onClick("", "", costume);
-          } else if (inputCount === 1) onClick(message);
-          else onClick(message, inputValue, costume);
+          if (inputCount === 1) onClick(message);
+          else onClick(message, inputValue);
         }}
         onDragStart={(e) => dragStart(e)}
         omDragOver={() => {
@@ -68,41 +64,6 @@ function LooksSvgComps({
         >
           {leftTitle}
         </p>
-
-        {isSelectRequired && (
-          <select
-            options={options}
-            onChange={(e) => {
-              setCostume(e.target.value);
-            }}
-            value={costume}
-            style={{
-              backgroundColor: "#855CD6",
-              borderRadius: "10px",
-              color: "white",
-              fontSize: "12px",
-              marginLeft: "5px",
-              zIndex: 10,
-            }}
-          >
-            {options &&
-              options.map((option, index) => {
-                return (
-                  <option
-                    key={index}
-                    style={{
-                      color: "white",
-                      backgroundColor: "white",
-                      fontSize: 12,
-                    }}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                );
-              })}
-          </select>
-        )}
 
         {(inputCount === 1 || inputCount === 2) && (
           <input
@@ -180,9 +141,4 @@ function LooksSvgComps({
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    looksAction: state.lookReducer.currentLookAction,
-  };
-};
-export default connect(mapStateToProps)(LooksSvgComps);
+export default LooksSvgComps;

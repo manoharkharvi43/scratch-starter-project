@@ -5,7 +5,6 @@ import { globalEventAction } from "../data/redux/actions/globalEventAction";
 import { leftRotateAction } from "../data/redux/actions/motion_actions/leftRotateAction";
 import { rightRotateAction } from "../data/redux/actions/motion_actions/rightRotateAction";
 import CatSprite from "./CatSprite";
-import CatSpriteSecond from "./CatSpriteSecond";
 import "./PreviewArea.css";
 // import { ReactComponent as UploadSvg } from "../assets/svg/file-upload.svg";
 import UploadSvg from "../utility/svgs/uploadSvg";
@@ -17,7 +16,6 @@ function PreviewArea({
   onClickSelectSprite,
   moveXandY,
   setXandY,
-  motionPosition,
 }) {
   const [divMaxWidth, setDivMaxWidth] = useState("");
   const [rotate, setRotate] = useState(0);
@@ -25,10 +23,8 @@ function PreviewArea({
   const [showMessage, setShowMessage] = useState(false);
   const [showUpload, setShowUpload] = useState(false);
   const [position, setPosition] = useState({
-    x: motionPosition.x,
-    y: motionPosition.y,
-    angle: motionPosition.angle,
-    glide: motionPosition.glide,
+    x: 0,
+    y: 0,
   });
   const [currentObjectPosition, setCurrentObjectPosition] = useState({
     x: 0,
@@ -48,13 +44,13 @@ function PreviewArea({
     dispatch(globalEventAction());
   };
 
-  // useEffect(() => {
-  //   setRotate("-" + leftRotate);
-  // }, [leftRotate]);
+  useEffect(() => {
+    setRotate("-" + leftRotate);
+  }, [leftRotate]);
 
-  // useEffect(() => {
-  //   setRotate(rightRotate);
-  // }, [rightRotate]);
+  useEffect(() => {
+    setRotate(rightRotate);
+  }, [rightRotate]);
 
   const showMessageInterval = (time) => {
     setShowMessage(true);
@@ -72,15 +68,20 @@ function PreviewArea({
 
   useEffect(() => {
     setPosition({
-      x: motionPosition.x,
-      y: motionPosition.y,
-      angle: motionPosition.angle,
-      glide: motionPosition.glide,
+      x: moveXandY.x + globalEventState,
+      y: moveXandY.y,
     });
-  }, [motionPosition]);
+    setPosition({
+      x: globalEventState + moveXandY.x,
+      y: moveXandY.y,
+    });
+  }, [moveXandY, globalEventState]);
 
+  useEffect(() => {
+    console.log(position, rotate, "position, rotate");
+  }, [position, rotate]);
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full" style={{}}>
       <Draggable
         bounds={{
           left: 0,
@@ -96,8 +97,7 @@ function PreviewArea({
           {(!looksAction.hide || looksAction.hide === "") && (
             <div
               style={{
-                transform: `translate(${position.x}px , ${position.y}px) rotate(${position.angle}deg) scale(${looksAction.size}) `,
-                transition: position.glide ? "transform 1s" : "none",
+                transform: `translate(${position.x}px , ${position.y}px) rotate(${rotate}deg)`,
                 width: 100,
                 position: "relative",
                 left: setXandY.x,
@@ -120,7 +120,7 @@ function PreviewArea({
                   </p>
                 </div>
               )}
-              {looksAction.costume === 1 ? <CatSprite /> : <CatSpriteSecond />}
+              <CatSprite />
             </div>
           )}
         </div>
@@ -130,7 +130,7 @@ function PreviewArea({
         style={{
           backgroundColor: bgColor,
         }}
-        className="w-10	h-10 flex flex-row justify-center items-center absolute right-10 bg-sky-500 bottom-4 rounded-full cursor-pointer"
+        className="w-10	h-10 flex flex-row justify-center items-center absolute bg-sky-500 bottom-4 rounded-full cursor-pointer"
         id="upload-container"
         onMouseEnter={(e) => {
           setShowUpload(true);
@@ -154,7 +154,7 @@ function PreviewArea({
         </p>
         {showUpload && (
           <div
-            className="absolute bg-sky-500 bottom-11 cursor-pointer w-10 h-10 flex justify-center  "
+            className="absolute bg-sky-500 bottom-11 cursor-pointer w-10 h-10 flex justify-center "
             id="upload-options"
             onClick={() => {}}
           >
@@ -176,8 +176,6 @@ const mapStateToProps = (state) => {
     looksAction: state.lookReducer.currentLookAction,
     moveXandY: state.moveXandYReducer.position,
     setXandY: state.setXandYReducer.position,
-    randomPosition: state.moveToRandomPositionReducer.position,
-    motionPosition: state.motionReducer.position,
   };
 };
 export default connect(mapStateToProps)(PreviewArea);

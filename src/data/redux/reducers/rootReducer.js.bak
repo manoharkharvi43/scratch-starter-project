@@ -7,9 +7,6 @@ import { rightRotateReducer } from "./motion_reducer/rightRotateReducer";
 import { moveXandYReducer } from "./motion_reducer/moveXandYReducer";
 import { setXandYReducer } from "./motion_reducer/setXandYReducer";
 import { globalPlayReducer } from "./globalPlayReducer";
-import { moveToRandomPositionReducer } from "./motion_reducer/moveToRandomPositionReducer";
-import { motionReducer } from "./motion_reducer/motionReducer";
-import { globalReducer } from "./globalReducer";
 export const rootReducer = combineReducers({
   currentCodeReducer,
   globalEventReducer,
@@ -19,7 +16,4 @@ export const rootReducer = combineReducers({
   moveXandYReducer,
   setXandYReducer,
   globalPlayReducer,
-  moveToRandomPositionReducer,
-  motionReducer,
-  globalReducer,
 });

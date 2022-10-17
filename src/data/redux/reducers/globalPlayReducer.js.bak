@@ -9,7 +9,7 @@ export const globalPlayReducer = (state = initialState, { type, payload }) => {
     case GLOBAL_PLAY_ACTION:
       return {
         ...state,
-        isClicked: payload,
+        isClicked: !state?.isClicked,
       };
 
     default:
