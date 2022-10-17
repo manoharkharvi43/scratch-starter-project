@@ -2,6 +2,7 @@ import React from "react";
 import { connect, useDispatch } from "react-redux";
 import { Events_List } from "../../data/list_data";
 import { globalPlayAction } from "../../data/redux/actions/globalPlayAction";
+import Events_comps from "../../utility/events_comps";
 function EventsLayout({ looksAction }) {
   const dispatch = useDispatch();
   return (
