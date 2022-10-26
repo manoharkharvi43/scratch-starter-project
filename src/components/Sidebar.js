@@ -31,34 +31,37 @@ function Sidebar({ currentCode }) {
   }, []);
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        zIndex: 20,
+        position: "relative",
+      }}
+      id="side-bar"
+    >
+      <CodeLayout />
       <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          zIndex: 20,
-          position: "relative",
-        }}
+        className="flex flex-row"
+        style={{ overflowX: "auto" }}
+        id="scroll-style"
       >
-        <CodeLayout />
-        <div className="flex flex-row" style={{ overflowX: "auto" }}>
-          <div className="w-60 flex-none h-full  flex flex-col items-start p-2 border-r border-gray-200 ">
-            <div className="motion" ref={motion_ref}>
-              Motion
-            </div>
-            <MotionLayout />
-            <div className="motion" ref={looks_ref}>
-              Looks
-            </div>
-            <LooksLayout />
-            <div className="motion" ref={looks_ref}>
-              Events
-            </div>
-            <Events_layout />
+        <div className="w-60 flex-none h-full  flex flex-col items-start p-2 border-r border-gray-200 ">
+          <div className="motion" ref={motion_ref}>
+            Motion
           </div>
+          <MotionLayout />
+          <div className="motion" ref={looks_ref}>
+            Looks
+          </div>
+          <LooksLayout />
+          <div className="motion" ref={looks_ref}>
+            Events
+          </div>
+          <Events_layout />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 const mapStateToProps = (state) => {

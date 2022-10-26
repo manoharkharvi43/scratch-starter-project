@@ -17,6 +17,7 @@ function MotionLayout({ motionPosition }) {
           <MotionComps
             styles={{
               backgroundColor: MOTION_COLOR,
+              marginBottom: 10,
             }}
             rightTitle={data.rightTitle}
             xAxisRequired={data.xAxisRequired}

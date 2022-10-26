@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Draggable from "react-draggable";
 import { connect } from "react-redux";
 
 function MotionComps({
@@ -22,10 +23,13 @@ function MotionComps({
   const [xAxis, setXAxis] = useState(motionPosition.x);
   const [yAxis, setYAxis] = useState(motionPosition.y);
   const [visible, setVisible] = useState(false);
+  const [onDragStart, setOnDragStart] = useState(false);
 
   function dragStart(ev) {
-    ev.dataTransfer.effectAllowed = "move";
+    setOnDragStart(true);
+    ev.dataTransfer.effectAllowed = "all";
     ev.dataTransfer.setData("Text", ev.target.getAttribute("id"));
+
     ev.dataTransfer.setDragImage(ev.target, 0, 0);
     return true;
   }
@@ -36,17 +40,9 @@ function MotionComps({
   }, [motionPosition]);
 
   return (
-    <>
-      {/* <Draggable
-        onStart={() => {
-          setVisible(true);
-        }}
-        onStop={() => {
-          // setVisible(false);
-        }}
-      > */}
+    // <Draggable>
+    <div>
       <div
-        draggable={true}
         style={{
           minWidth: 120,
           height: 30,
@@ -55,7 +51,8 @@ function MotionComps({
           maxWidth: 200,
           ...styles,
         }}
-        className="flex flex-row items-center  justify-between mb-2 "
+        draggable={true}
+        className="flex flex-row items-center  justify-between"
         onClick={() => {
           if (inputCount === 1) onClick(inputValue1);
           else onClick(inputValue1, inputValue2);
@@ -315,7 +312,8 @@ function MotionComps({
           )}
         </div>
       )}
-    </>
+      {/* </Draggable> */}
+    </div>
   );
 }
 

@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import "tailwindcss/tailwind.css";
 import App from "./App";
 import { store } from "./data/redux/store";
-
+import "./index.css";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

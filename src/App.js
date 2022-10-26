@@ -28,7 +28,7 @@ function App({ isClicked }) {
     if (isClicked) showMessageInterval();
   }, [isClicked]);
   return (
-    <div className="bg-blue-100  font-sans">
+    <div className="bg-blue-100  font-sans" style={{}}>
       <div
         style={{
           backgroundColor: TOP_NAV_COLOR,
@@ -65,10 +65,10 @@ function App({ isClicked }) {
           </div>
         </div>
       </div>
-      <div className="h-screen overflow-hidden flex flex-row  ">
+      <div className="h-screen overflow-hidden flex flex-row">
         {step === 0 ? (
           <>
-            <div className="flex-1 h-screen overflow-hidden flex flex-row bg-white border-t border-r border-gray-200 rounded-tr-xl mr-2">
+            <div className="flex-1 h-screen  flex flex-row bg-white border-t border-r border-gray-200 rounded-tr-xl mr-2">
               <Sidebar />
               <MidArea />
             </div>

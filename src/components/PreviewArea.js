@@ -81,50 +81,66 @@ function PreviewArea({
 
   return (
     <div className="w-full h-full">
-      <Draggable
-        bounds={{
-          left: 0,
-          bottom: window.innerHeight,
-          top: 0,
-          right: divMaxWidth - 50,
+      <div
+        className="flex-none overflow-hidden p-2"
+        style={{
+          width: "100%",
+          height: "100vh",
         }}
+        ref={ref}
       >
-        <div
-          className="w-full flex-none h-full overflow-hidden  p-2 "
-          ref={ref}
-        >
-          {(!looksAction.hide || looksAction.hide === "") && (
+        {(!looksAction.hide || looksAction.hide === "") && (
+          // <div>
+          <Draggable
+            bounds={{
+              left: 0,
+              bottom: window.innerHeight + 50,
+              top: 0,
+              right: divMaxWidth - 50,
+            }}
+          >
             <div
               style={{
-                transform: `translate(${position.x}px , ${position.y}px) rotate(${position.angle}deg) scale(${looksAction.size}) `,
-                transition: position.glide ? "transform 1s" : "none",
-                width: 100,
-                position: "relative",
-                left: setXandY.x,
-                top: setXandY.y,
+                width: 120,
               }}
             >
-              {showMessage && looksAction.hide === "" && (
-                <div
-                  className={
-                    looksAction.type === "message" ? "bubble" : "thinking"
-                  }
-                >
-                  <p
-                    style={{
-                      color: "black",
-                      fontSize: 12,
-                    }}
+              <div
+                style={{
+                  transform: `translate(${position.x}px , ${position.y}px) rotate(${position.angle}deg) scale(${looksAction.size})`,
+                  transition: position.glide ? "transform 1s" : "none",
+                  width: 100,
+                  position: "relative",
+                  left: setXandY.x,
+                  top: setXandY.y,
+                }}
+              >
+                {showMessage && looksAction.hide === "" && (
+                  <div
+                    className={
+                      looksAction.type === "message" ? "bubble" : "thinking"
+                    }
                   >
-                    {looksAction.message}
-                  </p>
-                </div>
-              )}
-              {looksAction.costume === 1 ? <CatSprite /> : <CatSpriteSecond />}
+                    <p
+                      style={{
+                        color: "black",
+                        fontSize: 12,
+                      }}
+                    >
+                      {looksAction.message}
+                    </p>
+                  </div>
+                )}
+                {looksAction.costume === 1 ? (
+                  <CatSprite />
+                ) : (
+                  <CatSpriteSecond />
+                )}
+              </div>
             </div>
-          )}
-        </div>
-      </Draggable>
+          </Draggable>
+          // </div>
+        )}
+      </div>
 
       <div
         style={{
