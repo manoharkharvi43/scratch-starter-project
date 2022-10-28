@@ -3,7 +3,7 @@ import { connect, useDispatch } from "react-redux";
 import { Looks_List, Motion_List } from "../data/list_data";
 import { lookAction } from "../data/redux/actions/look_actions/lookAction";
 import { motionAction } from "../data/redux/actions/motion_actions/motionAction";
-import { getAllJoinedDiv } from "../service";
+import { getAllPossibleDivs } from "../service";
 
 function MidArea({ globalClicked, motionPosition, looksAction }) {
   const delayFunction =
@@ -229,6 +229,8 @@ function MidArea({ globalClicked, motionPosition, looksAction }) {
     const targetDiv = document.getElementById("drag-div").children;
     console.log(targetDiv, "targetDiv");
     getAllDraggedItemAndDispatch(targetDiv);
+
+    console.log(globalClicked, "globalClicked");
   }, [globalClicked]);
   return (
     <div
@@ -243,7 +245,7 @@ function MidArea({ globalClicked, motionPosition, looksAction }) {
         var sidebar = document.getElementById("side-bar");
         var totalWidth = sidebar.clientWidth + ref.current.offsetWidth;
         var nodeCopy = document.getElementById(src).cloneNode(true);
-        nodeCopy.style.marginBottom = "0px";
+        nodeCopy.style.marginBottom = "1px";
         nodeCopy.style.left =
           ref.current.offsetWidth - (totalWidth - ev.clientX) + "px";
         nodeCopy.style.top = ev.clientY - 45 + "px";
@@ -265,15 +267,16 @@ function MidArea({ globalClicked, motionPosition, looksAction }) {
 
         e.preventDefault();
         e.stopPropagation();
-        e.target.onClick = getAllDraggedItemAndDispatch(
-          e.target.parentElement.children
-        );
+        // e.target.onClick = getAllDraggedItemAndDispatch(
+        //   e.target.parentElement.children
+        // );
         console.log(
-          getAllJoinedDiv(targetDiv, e.target.parentElement),
-          "dddddd"
+          getAllPossibleDivs(targetDiv, e.target.parentElement),
+          "arrss"
         );
+
         getAllDraggedItemAndDispatch(
-          getAllJoinedDiv(targetDiv, e.target.parentElement)
+          getAllPossibleDivs(targetDiv, e.target.parentElement)
         );
       }}
     ></div>
